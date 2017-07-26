@@ -1,1 +1,1 @@
-import Home from './components/home.jsx';
+import App from './components/app.jsx';
