@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import  Home  from './home.jsx';
+import  Home  from './Home.jsx';
+import Navbar from './Navbar.jsx';
 
 class App extends React.Component {
     render() {
         return (
-            <BrowserRouter >
-                <Route path="/" component={ Home } />
-            </BrowserRouter>
+            <div>
+                <Navbar />
+                <BrowserRouter >
+                    <Route path="/" component={ Home } />
+                </BrowserRouter>
+            </div>
         )
     }
 }
