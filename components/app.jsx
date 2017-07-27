@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import  Home  from './Home.jsx';
 import Navbar from './Navbar.jsx';
@@ -11,7 +11,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <BrowserRouter>
+                <HashRouter>
                     <div>
                         <Route component={ Navbar } />
                         <Switch>
@@ -21,7 +21,7 @@ class App extends React.Component {
                             <Redirect from="/" to="/home" />
                         </Switch>
                     </div>
-                </BrowserRouter>
+                </HashRouter>
             </div>
         )
     }
