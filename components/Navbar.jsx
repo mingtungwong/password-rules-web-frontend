@@ -19,17 +19,18 @@ class Navbar extends React.Component {
     }
 
     onSearch() {
-        this.props.history.push({pathname: '/results', state: {text: this.state.searchText}});
+        this.props.history.push({pathname: `/results/${this.state.searchText}`});
     }
 
     render() {
         return (
             <MuiThemeProvider>
                 <SearchBar
+                    hintText=""
                     style={
                         {
                           margin: '0 auto',
-                          maxWidth: '33%'  
+                          maxWidth: '33%'
                         }
                     }
                     onChange={ this.onTextChange }

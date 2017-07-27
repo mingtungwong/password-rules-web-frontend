@@ -15,7 +15,7 @@ class App extends React.Component {
                         <Route component={ Navbar } />
                         <Switch>
                             <Route path="/home" component={ Home } />
-                            <Route path="/results" component={ SearchResults } />
+                            <Route path="/results/:site" component={ SearchResults } />
                             <Redirect from="/" to="/home" />
                         </Switch>
                     </div>
