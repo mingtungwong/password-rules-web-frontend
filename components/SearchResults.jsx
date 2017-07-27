@@ -16,8 +16,9 @@ class SearchResults extends React.Component {
         }
     }
     
-    componentDidMount() {
-        const site = this.props.match.params.site;
+    componentWillReceiveProps(props) {
+        console.log(props);
+        const site = props.match.params.site;
         axios.get(`${config.apiURL}/site/${site}`)
         .then(response => response.data)
         .then(sites => {
