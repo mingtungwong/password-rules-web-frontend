@@ -9,7 +9,6 @@ class Navbar extends React.Component {
         this.state = {
             searchText: ""
         }
-        console.log(this.props);
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
     }

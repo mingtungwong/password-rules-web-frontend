@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import  Home  from './Home.jsx';
 import Navbar from './Navbar.jsx';
 import SearchResults from './SearchResults.jsx';
+import SiteProfile from './SiteProfile.jsx';
 
 class App extends React.Component {
     render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
                         <Switch>
                             <Route path="/home" component={ Home } />
                             <Route path="/results/:site" component={ SearchResults } />
+                            <Route path="/site/:siteName" component={ SiteProfile }/>
                             <Redirect from="/" to="/home" />
                         </Switch>
                     </div>

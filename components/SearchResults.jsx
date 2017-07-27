@@ -14,16 +14,15 @@ class SearchResults extends React.Component {
         this.state = {
             results: null
         }
+    }
+    
+    componentDidMount() {
         const site = this.props.match.params.site;
         axios.get(`${config.apiURL}/site/${site}`)
         .then(response => response.data)
         .then(sites => {
             this.setState({results: sites})
-        });
-    }
-
-    componentWillUpdate() {
-        
+        })
     }
 
     render() {
