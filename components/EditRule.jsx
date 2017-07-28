@@ -3,6 +3,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import NavigationCancel from 'material-ui/svg-icons/navigation/cancel';
 
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
 const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces"];
@@ -92,6 +95,11 @@ class EditRule extends React.Component {
                                 />
                                 : null
                             }
+                        </div>
+                        <div>
+                            <IconButton>
+                                <NavigationCancel className="closeButton" />
+                            </IconButton>
                         </div>
                     </div>
                 </MuiThemeProvider>

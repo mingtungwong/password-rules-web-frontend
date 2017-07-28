@@ -42,3 +42,8 @@
     max-width: 150px;
     margin-right: 10px;
 }
+
+.closeButton {
+    position: relative;
+    top: -10px;
+}
