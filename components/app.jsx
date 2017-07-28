@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import  Home  from './Home.jsx';
 import Navbar from './Navbar.jsx';
@@ -9,6 +10,11 @@ import SiteProfile from './SiteProfile.jsx';
 import SiteCreationPage from './SiteCreationPage.jsx';
 
 class App extends React.Component {
+
+    componentDidMount() {
+        injectTapEventPlugin();
+    }
+
     render() {
         return (
             <div>
