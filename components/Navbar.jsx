@@ -12,6 +12,7 @@ class Navbar extends React.Component {
         }
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
+        this.onAddButtonTap = this.onAddButtonTap.bind(this);
     }
 
     onTextChange(text) {
@@ -22,17 +23,28 @@ class Navbar extends React.Component {
         this.props.history.push({pathname: `/results/${this.state.searchText}`});
     }
 
+    onAddButtonTap() {
+        this.props.history.push({pathname: '/addsite'});
+    }
+
     render() {
         return (
                 <MuiThemeProvider>
-                    <div id="test">
+                    <div className="nav">
                         <SearchBar
                             hintText=""
                             onChange={ this.onTextChange }
                             onRequestSearch={ this.onSearch }
-                            style={{alignSelf: 'center'}}
+                            style={{
+                                margin: '5px auto',
+                                textAlign: 'center',
+                            }}
                         />
-                        <RaisedButton label="test" style={{float: 'right'}}/>
+                        <RaisedButton
+                            label="Add Site"
+                            style={{maxHeight: "35px", marginTop: "5px"}}
+                            onClick={this.onAddButtonTap}
+                        />
                     </div>
                 </MuiThemeProvider>
         )
