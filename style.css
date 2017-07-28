@@ -19,3 +19,15 @@
 .addSitePage {
     display: block;
 }
+
+.editMenu > div{
+    display: inline;
+}
+
+.ruleChoiceDropDown {
+    width: 200px;
+}
+
+.ruleCategoryDropDown {
+    width: 250px;
+}

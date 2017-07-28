@@ -16,26 +16,47 @@ class EditRule extends React.Component {
             ruleCategory: 0,
             quantity: []
         }
+        this.handleRuleChange = this.handleRuleChange.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
     }
 
     handleRuleChange(event, index, value) {
-        this.setState({ruleChoice: index})
-    };
+        this.setState({ruleChoice: +value})
+    }
+
+    handleCategoryChange(event, index, value) {
+        this.setState({ruleCategory: +value});
+    }
 
     render() {
-        console.log(ruleChoices);
         return (
             <div>
                 <MuiThemeProvider>
-                    <div>
-                        <DropDownMenu
-                            value={this.state.ruleChoice}
-                            onChange={this.handleRuleChange}
-                        >
-                        {
-                            ruleChoices.map((choice, idx) => <MenuItem value={idx} primaryText={choice} onTouchTap={this.props.onTouchTap}/>)
-                        }
-                        </DropDownMenu>
+                    <div className="editMenu">
+                        <div>
+                            <DropDownMenu
+                                value={this.state.ruleChoice}
+                                onChange={this.handleRuleChange}
+                                autoWidth={false}
+                                className="ruleChoiceDropDown"
+                            >
+                            {
+                                ruleChoices.map((choice, idx) => <MenuItem value={idx} primaryText={choice} />)
+                            }
+                            </DropDownMenu>
+                        </div>
+                        <div>
+                            <DropDownMenu
+                                value={this.state.ruleCategory}
+                                onChange={this.handleCategoryChange}
+                                autoWidth={false}
+                                className="ruleCategoryDropDown"
+                            >
+                            {
+                                categoryChoices.map((choice, idx) => <MenuItem value={idx} primaryText={choice} />)
+                            }
+                            </DropDownMenu>
+                        </div>
                     </div>
                 </MuiThemeProvider>
             </div>
