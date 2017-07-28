@@ -6,6 +6,7 @@ import  Home  from './Home.jsx';
 import Navbar from './Navbar.jsx';
 import SearchResults from './SearchResults.jsx';
 import SiteProfile from './SiteProfile.jsx';
+import Test from './Test.jsx';
 
 class App extends React.Component {
     render() {
@@ -18,6 +19,7 @@ class App extends React.Component {
                             <Route path="/home" component={ Home } />
                             <Route path="/results/:site" component={ SearchResults } />
                             <Route path="/site/:siteName" component={ SiteProfile }/>
+                            <Route path="/test" component = { Test } />
                             <Redirect from="/" to="/home" />
                         </Switch>
                     </div>

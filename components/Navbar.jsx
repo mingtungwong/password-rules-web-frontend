@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from 'material-ui-search-bar';
+import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Navbar extends React.Component {
@@ -23,19 +24,17 @@ class Navbar extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider>
-                <SearchBar
-                    hintText=""
-                    style={
-                        {
-                          margin: '0 auto',
-                          maxWidth: '33%'
-                        }
-                    }
-                    onChange={ this.onTextChange }
-                    onRequestSearch={ this.onSearch }
-                    />
-            </MuiThemeProvider>
+                <MuiThemeProvider>
+                    <div id="test">
+                        <SearchBar
+                            hintText=""
+                            onChange={ this.onTextChange }
+                            onRequestSearch={ this.onSearch }
+                            style={{alignSelf: 'center'}}
+                        />
+                        <RaisedButton label="test" style={{float: 'right'}}/>
+                    </div>
+                </MuiThemeProvider>
         )
     }
 }
