@@ -2,10 +2,10 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
 
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
 const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces"];
-
 
 class EditRule extends React.Component {
 
@@ -18,6 +18,8 @@ class EditRule extends React.Component {
         }
         this.handleRuleChange = this.handleRuleChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleMinimumQuantityChange = this.handleMinimumQuantityChange.bind(this);
+        this.handleMaximumQuantityChange = this.handleMaximumQuantityChange.bind(this);
     }
 
     handleRuleChange(event, index, value) {
@@ -28,9 +30,21 @@ class EditRule extends React.Component {
         this.setState({ruleCategory: +value});
     }
 
+    handleMinimumQuantityChange(event, index, value) {
+
+    }
+
+    handleMaximumQuantityChange(event, index, value) {
+
+    }
+
     render() {
+
+        const choice = ruleChoices[this.state.ruleChoice];
+        const category = categoryChoices[this.state.ruleCategory];
+
         return (
-            <div>
+            <div className="editRuleLine">
                 <MuiThemeProvider>
                     <div className="editMenu">
                         <div>
@@ -56,6 +70,28 @@ class EditRule extends React.Component {
                                 categoryChoices.map((choice, idx) => <MenuItem value={idx} primaryText={choice} />)
                             }
                             </DropDownMenu>
+                        </div>
+                        <div>
+                            {
+                                choice === "Minimum" || choice === "Range" ?
+                                <TextField
+                                    floatingLabelText={`Minimum quantity`}
+                                    onChange={this.handleMinimumQuantityChange}
+                                    className="quantityTF"
+                                />
+                                : null
+                            }
+                        </div>
+                        <div>
+                            {
+                                choice === "Maximum" || choice === "Range" ?
+                                <TextField
+                                    floatingLabelText={`Maximum quantity`}
+                                    onChange={this.handleMaximumQuantityChange}
+                                    className="quantityTF"
+                                />
+                                : null
+                            }
                         </div>
                     </div>
                 </MuiThemeProvider>

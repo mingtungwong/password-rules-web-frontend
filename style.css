@@ -31,3 +31,14 @@
 .ruleCategoryDropDown {
     width: 250px;
 }
+
+.editRuleLine {
+    margin-top: 30px;
+}
+
+.quantityTF {
+    position: relative;
+    top: -17px;
+    max-width: 150px;
+    margin-right: 10px;
+}
