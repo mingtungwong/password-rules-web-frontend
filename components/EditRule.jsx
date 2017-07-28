@@ -21,8 +21,7 @@ class EditRule extends React.Component {
         }
         this.handleRuleChange = this.handleRuleChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
-        this.handleMinimumQuantityChange = this.handleMinimumQuantityChange.bind(this);
-        this.handleMaximumQuantityChange = this.handleMaximumQuantityChange.bind(this);
+        this.handleQuantityChange = this.handleQuantityChange.bind(this);
     }
 
     handleRuleChange(event, index, value) {
@@ -33,12 +32,13 @@ class EditRule extends React.Component {
         this.setState({ruleCategory: +value});
     }
 
-    handleMinimumQuantityChange(event, index, value) {
-
-    }
-
-    handleMaximumQuantityChange(event, index, value) {
-
+    handleQuantityChange(event, value) {
+        const quantity = this.state.quantity;
+        if(Number.isInteger(value)) {
+            if(event.target.id === 'quantityMin') quantity[0] = +value;
+            else quantity[1] = +value;
+            this.setState({quantity});
+        }
     }
 
     render() {
@@ -79,8 +79,9 @@ class EditRule extends React.Component {
                                 choice === "Minimum" || choice === "Range" ?
                                 <TextField
                                     floatingLabelText={`Minimum quantity`}
-                                    onChange={this.handleMinimumQuantityChange}
+                                    onChange={this.handleQuantityChange}
                                     className="quantityTF"
+                                    id="quantityMin"
                                 />
                                 : null
                             }
@@ -90,14 +91,15 @@ class EditRule extends React.Component {
                                 choice === "Maximum" || choice === "Range" ?
                                 <TextField
                                     floatingLabelText={`Maximum quantity`}
-                                    onChange={this.handleMaximumQuantityChange}
+                                    onChange={this.handleQuantityChange}
                                     className="quantityTF"
+                                    id="quantityMax"
                                 />
                                 : null
                             }
                         </div>
                         <div>
-                            <IconButton>
+                            <IconButton onClick={ this.props.cancel }>
                                 <NavigationCancel className="closeButton" />
                             </IconButton>
                         </div>

@@ -16,6 +16,7 @@ class SiteCreationPage extends React.Component {
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.onAddRule = this.onAddRule.bind(this);
         this.updateRules = this.updateRules.bind(this);
+        this.cancelEdit = this.cancelEdit.bind(this);
     }
 
     onSiteTextChange(text) {
@@ -30,6 +31,12 @@ class SiteCreationPage extends React.Component {
 
     updateRules(id, rule) {
         console.log(id, rule);
+    }
+
+    cancelEdit(index) {
+        const rules = this.state.rules;
+        rules.splice(index, 1);
+        this.setState({rules});
     }
 
     render() {
@@ -51,7 +58,7 @@ class SiteCreationPage extends React.Component {
                         </div>
                         <div>
                             {
-                                this.state.rules.map((element, idx) => <EditRule key={idx} callback={this.updateRules}/>)
+                                this.state.rules.map((element, idx) => <EditRule key={idx} index="idx" callback={this.updateRules} cancel={this.cancelEdit}/>)
                             }
                         </div>
                     </div>
