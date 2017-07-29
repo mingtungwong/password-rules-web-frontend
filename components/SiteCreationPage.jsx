@@ -56,7 +56,6 @@ class SiteCreationPage extends React.Component {
         const rules = this.state.rules.slice();
         rules[this.findRuleById(rule.id)] = rule;
         this.setState({rules});
-        console.log(this.state);
     }
 
     cancelEdit(id) {

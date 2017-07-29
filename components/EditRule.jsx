@@ -26,23 +26,25 @@ class EditRule extends React.Component {
     }
 
     handleRuleChange(event, index, value) {
-        this.setState({rule: +value})
+        this.setState({rule: +value, quantity: []})
         this.props.callback(this.state);
     }
 
     handleCategoryChange(event, index, value) {
-        this.setState({category: +value});
+        this.setState({category: +value, quantity: []});
         this.props.callback(this.state);
     }
 
     handleQuantityChange(event, value) {
-        const quantity = this.state.quantity;
-        if(Number.isInteger(value)) {
+        const quantity = this.state.quantity.slice();
+        console.log(isNaN(value));
+        if(!isNaN(value)) {
             if(event.target.id === 'quantityMin') quantity[0] = +value;
             else quantity[1] = +value;
-            this.setState({quantity});
+            this.setState({quantity: quantity});
         }
         this.props.callback(this.state);
+        console.log(this.state);
     }
 
     render() {
@@ -82,10 +84,13 @@ class EditRule extends React.Component {
                             {
                                 choice === "Minimum" || choice === "Range" ?
                                 <TextField
+                                    key={this.state.quantity}
                                     floatingLabelText={`Minimum quantity`}
+                                    floatingLabelFixed={true}
                                     onChange={this.handleQuantityChange}
                                     className="quantityTF"
                                     id="quantityMin"
+                                    value={this.state.quantity[0]}
                                 />
                                 : null
                             }
@@ -94,10 +99,13 @@ class EditRule extends React.Component {
                             {
                                 choice === "Maximum" || choice === "Range" ?
                                 <TextField
+                                    key={this.state.quantity}
                                     floatingLabelText={`Maximum quantity`}
+                                    floatingLabelFixed={true}
                                     onChange={this.handleQuantityChange}
                                     className="quantityTF"
                                     id="quantityMax"
+                                    value={this.state.quantity[1]}
                                 />
                                 : null
                             }
