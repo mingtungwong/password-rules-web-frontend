@@ -4,6 +4,13 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import EditRule from './EditRule.jsx';
+let ruleIdCounter = 0;
+
+const defaultRule = {
+    rule: "Minimum",
+    category: "Characters",
+    quantity: []
+}
 
 class SiteCreationPage extends React.Component {
     
@@ -19,23 +26,43 @@ class SiteCreationPage extends React.Component {
         this.cancelEdit = this.cancelEdit.bind(this);
     }
 
+    createDefaultRule() {
+        const obj = {};
+        obj.rule = "Minimum";
+        obj.category = "Characters";
+        obj.quantity = [];
+        obj.id = ruleIdCounter++;
+        return obj;
+    }
+
+    findRuleById(id) {
+        const rules = this.state.rules;
+        const length = rules.length;
+        for(let i = 0; i < length; i++) {
+            if(rules[i].id === id) return i;
+        }
+        return null;
+    }
+
     onSiteTextChange(text) {
         this.setState({site: text});
     }
 
     onAddRule() {
-        let rules = this.state.rules;
-        rules.push(null);
-        this.setState({rules: rules});
+        let rules = this.state.rules.slice();
+        rules.push(this.createDefaultRule());
+        this.setState({rules});
     }
 
-    updateRules(id, rule) {
-        console.log(id, rule);
+    updateRules(rule) {
+        const rules = this.state.rules.slice();
+        rules[this.findRuleById(rule.id)] = rule;
+        this.setState({rules});
     }
 
-    cancelEdit(index) {
-        const rules = this.state.rules;
-        rules.splice(index, 1);
+    cancelEdit(id) {
+        const rules = this.state.rules.slice();
+        rules.splice(this.findRuleById(id), 1);
         this.setState({rules});
     }
 
@@ -58,7 +85,18 @@ class SiteCreationPage extends React.Component {
                         </div>
                         <div>
                             {
-                                this.state.rules.map((element, idx) => <EditRule key={idx} index="idx" callback={this.updateRules} cancel={this.cancelEdit}/>)
+                                this.state.rules.map((element, idx) => {     
+                                    return (
+                                    <EditRule
+                                        key={element.id}
+                                        id={element.id}
+                                        rule={element.rule}
+                                        category={element.category}
+                                        quantity={element.quantity}
+                                        callback={this.updateRules}
+                                        cancel={this.cancelEdit}
+                                    />)
+                                })
                             }
                         </div>
                     </div>

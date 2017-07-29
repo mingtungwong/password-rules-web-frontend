@@ -15,9 +15,10 @@ class EditRule extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ruleChoice: 0,
-            ruleCategory: 0,
-            quantity: []
+            rule: ruleChoices.indexOf(props.rule),
+            category: categoryChoices.indexOf(props.category),
+            quantity: props.quantity,
+            id: props.id
         }
         this.handleRuleChange = this.handleRuleChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -25,11 +26,13 @@ class EditRule extends React.Component {
     }
 
     handleRuleChange(event, index, value) {
-        this.setState({ruleChoice: +value})
+        this.setState({rule: +value})
+        this.props.callback(this.state);
     }
 
     handleCategoryChange(event, index, value) {
-        this.setState({ruleCategory: +value});
+        this.setState({category: +value});
+        this.props.callback(this.state);
     }
 
     handleQuantityChange(event, value) {
@@ -39,12 +42,13 @@ class EditRule extends React.Component {
             else quantity[1] = +value;
             this.setState({quantity});
         }
+        this.props.callback(this.state);
     }
 
     render() {
 
-        const choice = ruleChoices[this.state.ruleChoice];
-        const category = categoryChoices[this.state.ruleCategory];
+        const choice = ruleChoices[this.state.rule];
+        const category = categoryChoices[this.state.category];
 
         return (
             <div className="editRuleLine">
@@ -52,7 +56,7 @@ class EditRule extends React.Component {
                     <div className="editMenu">
                         <div>
                             <DropDownMenu
-                                value={this.state.ruleChoice}
+                                value={this.state.rule}
                                 onChange={this.handleRuleChange}
                                 autoWidth={false}
                                 className="ruleChoiceDropDown"
@@ -64,7 +68,7 @@ class EditRule extends React.Component {
                         </div>
                         <div>
                             <DropDownMenu
-                                value={this.state.ruleCategory}
+                                value={this.state.category}
                                 onChange={this.handleCategoryChange}
                                 autoWidth={false}
                                 className="ruleCategoryDropDown"
@@ -99,7 +103,7 @@ class EditRule extends React.Component {
                             }
                         </div>
                         <div>
-                            <IconButton onClick={ this.props.cancel }>
+                            <IconButton onClick={ () => this.props.cancel(this.state.id) }>
                                 <NavigationCancel className="closeButton" />
                             </IconButton>
                         </div>
