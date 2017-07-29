@@ -6,11 +6,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import EditRule from './EditRule.jsx';
 let ruleIdCounter = 0;
 
-const defaultRule = {
-    rule: "Minimum",
-    category: "Characters",
-    quantity: []
-}
+const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
+const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces"];
 
 class SiteCreationPage extends React.Component {
     
@@ -24,6 +21,7 @@ class SiteCreationPage extends React.Component {
         this.onAddRule = this.onAddRule.bind(this);
         this.updateRules = this.updateRules.bind(this);
         this.cancelEdit = this.cancelEdit.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     createDefaultRule() {
@@ -58,12 +56,17 @@ class SiteCreationPage extends React.Component {
         const rules = this.state.rules.slice();
         rules[this.findRuleById(rule.id)] = rule;
         this.setState({rules});
+        console.log(this.state);
     }
 
     cancelEdit(id) {
         const rules = this.state.rules.slice();
         rules.splice(this.findRuleById(id), 1);
         this.setState({rules});
+    }
+
+    submit() {
+
     }
 
     render() {
@@ -77,7 +80,7 @@ class SiteCreationPage extends React.Component {
                                 onChange={this.onSiteTextChange}
                             />
                         </div>
-                        <div>
+                        <div className="addRuleButton">
                             <RaisedButton
                                 label="Add Rule"
                                 onClick={this.onAddRule}
@@ -98,6 +101,12 @@ class SiteCreationPage extends React.Component {
                                     />)
                                 })
                             }
+                        </div>
+                        <div className="submitButton">
+                            <RaisedButton
+                                label="Submit"
+                                oClick={this.submit}
+                            />
                         </div>
                     </div>
                 </MuiThemeProvider>

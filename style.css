@@ -47,3 +47,12 @@
     position: relative;
     top: -10px;
 }
+
+.addRuleButton {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.submitButton {
+    margin-top: 10px;
+}
