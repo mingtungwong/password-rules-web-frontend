@@ -15,7 +15,8 @@ class SiteCreationPage extends React.Component {
         super(props);
         this.state = {
             site: "",
-            rules: []
+            rules: [],
+            error: false
         }
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.onAddRule = this.onAddRule.bind(this);
@@ -30,6 +31,7 @@ class SiteCreationPage extends React.Component {
         obj.category = "Characters";
         obj.quantity = [];
         obj.id = ruleIdCounter++;
+        obj.error = null;
         return obj;
     }
 
@@ -66,6 +68,51 @@ class SiteCreationPage extends React.Component {
 
     submit() {
 
+        let site = this.state.site + "";
+        let rules = this.state.rules.slice();
+
+        if(!site.length) {
+            this.setState({error: true});
+            return;
+        }
+        else this.setState({error: false});
+
+        let length = rules.length;
+        for(let i = 0; i < length; i++) {
+            let rule = rules[i];
+            let ruleChoice = ruleChoices[rule.rule];
+            if(ruleChoice === "Minimum" || ruleChoice === "Maximum") {
+                if(isNaN(+rule.quantity[0])) {
+                    rule.error = "NaN";
+                    this.setState({rules});
+                    return
+                }
+            }
+            else if(ruleChoice === "Maximum") {
+                if(isNan(+rule.quantity[1])) {
+                    rule.error = "NaN";
+                    this.setState({rules});
+                    return;
+                }
+            }
+            else if(ruleChoice === "Range") {
+                if(isNaN(rule.quantity[0]) || isNaN(rule.quantity[1])) {
+                    rule.error = "NaN";
+                    this.setState({rules});
+                    return;
+                }
+                else if(rule.quantity[1] >= rule.quantity[0]) {
+                    rule.error = "Range";
+                    this.setState({rules});
+                    return;
+                }
+                else {
+                    rule.error = null;
+                }
+            }
+        }
+        this.setState({rules});
+        console.log("No errors");
     }
 
     render() {
@@ -73,6 +120,15 @@ class SiteCreationPage extends React.Component {
             <div>
                 <MuiThemeProvider>
                     <div className="addSitePage">
+                        {
+                            this.state.error ?
+                            (
+                                <div className="errorText">
+                                    The site must be filled in
+                                </div>
+                            )
+                            : null
+                        }
                         <div>
                             <TextField
                                 floatingLabelText="Site Name"
@@ -95,6 +151,7 @@ class SiteCreationPage extends React.Component {
                                         rule={element.rule}
                                         category={element.category}
                                         quantity={element.quantity}
+                                        error={element.error}
                                         callback={this.updateRules}
                                         cancel={this.cancelEdit}
                                     />)
@@ -104,7 +161,7 @@ class SiteCreationPage extends React.Component {
                         <div className="submitButton">
                             <RaisedButton
                                 label="Submit"
-                                oClick={this.submit}
+                                onClick={this.submit}
                             />
                         </div>
                     </div>

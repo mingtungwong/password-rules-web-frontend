@@ -56,3 +56,9 @@
 .submitButton {
     margin-top: 10px;
 }
+
+.errorText {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}

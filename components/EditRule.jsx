@@ -9,6 +9,10 @@ import NavigationCancel from 'material-ui/svg-icons/navigation/cancel';
 
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
 const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces"];
+const errors = {
+    "NaN": "One or more values entered is not a number",
+    "Range": "The range of numbers is invalid"
+}
 
 class EditRule extends React.Component {
 
@@ -18,7 +22,8 @@ class EditRule extends React.Component {
             rule: ruleChoices.indexOf(props.rule),
             category: categoryChoices.indexOf(props.category),
             quantity: props.quantity,
-            id: props.id
+            id: props.id,
+            error: props.error
         }
         this.handleRuleChange = this.handleRuleChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -37,14 +42,14 @@ class EditRule extends React.Component {
 
     handleQuantityChange(event, value) {
         const quantity = this.state.quantity.slice();
-        console.log(isNaN(value));
         if(!isNaN(value)) {
             if(event.target.id === 'quantityMin') quantity[0] = +value;
             else quantity[1] = +value;
+            if(quantity[0] === 0) quantity[0] = null;
+            if(quantity[1] === 0) quantity[1] = null;
             this.setState({quantity: quantity});
         }
         this.props.callback(this.state);
-        console.log(this.state);
     }
 
     render() {
@@ -54,6 +59,15 @@ class EditRule extends React.Component {
 
         return (
             <div className="editRuleLine">
+                {
+                    this.state.error ?
+                    (
+                        <div className="errorText">
+                            {errors[this.state.error]}
+                        </div>
+                    )
+                    : null
+                }
                 <MuiThemeProvider>
                     <div className="editMenu">
                         <div>
@@ -84,7 +98,6 @@ class EditRule extends React.Component {
                             {
                                 choice === "Minimum" || choice === "Range" ?
                                 <TextField
-                                    key={this.state.quantity}
                                     floatingLabelText={`Minimum quantity`}
                                     floatingLabelFixed={true}
                                     onChange={this.handleQuantityChange}
@@ -99,13 +112,12 @@ class EditRule extends React.Component {
                             {
                                 choice === "Maximum" || choice === "Range" ?
                                 <TextField
-                                    key={this.state.quantity}
                                     floatingLabelText={`Maximum quantity`}
                                     floatingLabelFixed={true}
                                     onChange={this.handleQuantityChange}
                                     className="quantityTF"
-                                    id="quantityMax"
                                     value={this.state.quantity[1]}
+                                    id="quantityMax"
                                 />
                                 : null
                             }
