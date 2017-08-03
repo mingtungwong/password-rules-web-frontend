@@ -28,26 +28,29 @@ class EditRule extends React.Component {
         this.handleRuleChange = this.handleRuleChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
+        this.edit = this.edit.bind(this);
+    }
+
+    edit() {
+        this.props.editRule(this.state);
     }
 
     handleRuleChange(event, index, value) {
-        this.setState({rule: +value, quantity: []})
-        this.props.editRule(this.state);
+        this.setState({rule: +value, quantity: []}, this.edit);
     }
 
     handleCategoryChange(event, index, value) {
-        this.setState({category: +value, quantity: []});
-        this.props.editRule(this.state);
+        this.setState({category: +value, quantity: []}, this.edit);
     }
 
     handleQuantityChange(event, value) {
         const quantity = this.state.quantity.map(item => item);
+        console.log('adfjasdfa', value);
         if(!isNaN(value)) {
             if(event.target.id === 'quantityMin') quantity[0] = +value;
             else quantity[1] = +value;
-            this.setState({quantity});
-        }
-        this.props.editRule(this.state);
+            this.setState({quantity}, this.edit);
+        }        
     }
 
     render() {
