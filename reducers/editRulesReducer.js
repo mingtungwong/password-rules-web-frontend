@@ -1,6 +1,7 @@
 const ADD_RULE = 'ADD_RULE';
 const EDIT_RULE = 'EDIT_RULE';
 const DELETE_RULE = 'DELETE_RULE';
+const RESET_RULES = 'RESET_RULES';
 
 let ruleIdCounter = 0;
 
@@ -39,10 +40,17 @@ export const editRule = (rule) => {
     }
 }
 
+
 export const deleteRule = (ruleId) => {
     return {
         type: DELETE_RULE,
         id: ruleId
+    }
+}
+
+export const resetRules = () => {
+    return {
+        type: RESET_RULES
     }
 }
 
@@ -59,6 +67,9 @@ export default (state = [], action) => {
             break;
         case DELETE_RULE:
             return state.filter(item => item.id !== action.id);
+            break;
+        case RESET_RULES:
+            return [];
             break;
     }
 

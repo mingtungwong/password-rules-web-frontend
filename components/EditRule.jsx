@@ -53,7 +53,6 @@ class EditRule extends React.Component {
     }
 
     render() {
-
         const choice = ruleChoices[this.state.rule];
         const category = categoryChoices[this.state.category];
 

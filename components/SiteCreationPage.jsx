@@ -97,6 +97,7 @@ class SiteCreationPage extends React.Component {
                         <div>
                             <TextField
                                 floatingLabelText="Site Name"
+                                floatingLabelFixed={true}
                                 onChange={this.onSiteTextChange}
                             />
                         </div>
