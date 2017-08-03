@@ -20,6 +20,7 @@ class Navbar extends React.Component {
     }
 
     onSearch() {
+        this.props.dispatch(this.props.getSearchResults(this.state.searchText));
         this.props.history.push({pathname: `/results/${this.state.searchText}`});
     }
 

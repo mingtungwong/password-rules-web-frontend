@@ -11,29 +11,14 @@ class SearchResults extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            results: null
-        }
-        this.findSearchResults(this.props);
-    }
-
-    findSearchResults(props) {
-        const site = props.match.params.site;
-        axios.get(`${config.apiURL}/site/${site}`)
-        .then(response => response.data)
-        .then(sites => this.setState({results: sites}))
-    }
-    
-    componentWillReceiveProps(props) {
-        this.findSearchResults(props);
     }
 
     render() {
         return (
             <div>
                 {
-                    this.state.results ?
-                    <ResultLinks results={this.state.results} />
+                    this.props.sites ?
+                    <ResultLinks results={this.props.sites} />
                     :
                     <MuiThemeProvider>
                         <CircularProgress />
