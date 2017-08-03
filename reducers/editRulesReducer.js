@@ -23,11 +23,7 @@ const createDefaultRule = () => {
 }
 
 const updateRule = (array, rule) => {
-    const newArray = array.filter((item, index) => item.id !== rule.id);
-    return [
-        ...newArray,
-        rule
-    ]
+    return  array.map((item, index) => item.id === rule.id? rule: item);
 }
 
 export const addRule = () => {

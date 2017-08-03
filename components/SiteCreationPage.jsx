@@ -19,13 +19,11 @@ class SiteCreationPage extends React.Component {
             error: false
         }
 
-        console.log(props);
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.submit = this.submit.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
-        console.log('in new props', newProps);
         this.setState({rules: newProps.rules});
     }
 
