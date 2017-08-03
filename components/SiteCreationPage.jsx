@@ -1,10 +1,13 @@
 import React from 'react';
+import axios from 'axios';
+
+import config from '../config.json';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import EditRuleContainer from './EditRuleContainer.jsx';
-let ruleIdCounter = 0;
 
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
 const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces"];
@@ -21,63 +24,36 @@ class SiteCreationPage extends React.Component {
 
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.submit = this.submit.bind(this);
+        console.log(this.props);
     }
 
     componentWillReceiveProps(newProps) {
         this.setState({rules: newProps.rules});
     }
 
-    onSiteTextChange(text) {
-        this.setState({site: text});
+    onSiteTextChange(event, value) {
+        this.setState({site: value});
+    }
+
+    ruleMapper(rule) {
+        const obj = {};
+        obj.rule = ruleChoices[rule.rule];
+        obj.category = categoryChoices[rule.category];
+        obj.quantity = rule.quantity;
+        return obj;
     }
 
     submit() {
-
-        let site = this.state.site + "";
-        let rules = this.state.rules.slice();
-
-        if(!site.length) {
-            this.setState({error: true});
-            return;
-        }
-        else this.setState({error: false});
-
-        let length = rules.length;
-        for(let i = 0; i < length; i++) {
-            let rule = rules[i];
-            let ruleChoice = ruleChoices[rule.rule];
-            if(ruleChoice === "Minimum" || ruleChoice === "Maximum") {
-                if(isNaN(+rule.quantity[0])) {
-                    rule.error = "NaN";
-                    this.setState({rules});
-                    return
-                }
-            }
-            else if(ruleChoice === "Maximum") {
-                if(isNan(+rule.quantity[1])) {
-                    rule.error = "NaN";
-                    this.setState({rules});
-                    return;
-                }
-            }
-            else if(ruleChoice === "Range") {
-                if(isNaN(rule.quantity[0]) || isNaN(rule.quantity[1])) {
-                    rule.error = "NaN";
-                    this.setState({rules});
-                    return;
-                }
-                else if(rule.quantity[1] >= rule.quantity[0]) {
-                    rule.error = "Range";
-                    this.setState({rules});
-                    return;
-                }
-                else {
-                    rule.error = null;
-                }
-            }
-        }
-        this.setState({rules});
-        console.log("No errors");
+        const body = {};
+        body.site = this.state.site;
+        body.rules = this.state.rules.map(this.ruleMapper);
+        console.log("I'm body", body, config.apiURL);
+        axios.post(`${config.apiURL}/site`, body)
+        .then((response) => {
+            console.log(response);
+            this.props.resetRules();
+            this.props.history.push({pathname: '/home'});
+        })
     }
 
     render() {

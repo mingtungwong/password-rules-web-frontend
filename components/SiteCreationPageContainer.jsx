@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SiteCreationPage from './SiteCreationPage.jsx';
-import { addRule } from '../reducers/editRulesReducer';
+import { addRule, resetRules } from '../reducers/editRulesReducer';
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addRule: () => dispatch(addRule())
+        addRule: () => dispatch(addRule()),
+        resetRules: () => dispatch(resetRules())
     }
 }
 
