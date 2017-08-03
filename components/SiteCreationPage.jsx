@@ -24,7 +24,6 @@ class SiteCreationPage extends React.Component {
 
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.submit = this.submit.bind(this);
-        console.log(this.props);
     }
 
     componentWillReceiveProps(newProps) {
@@ -47,12 +46,10 @@ class SiteCreationPage extends React.Component {
         const body = {};
         body.site = this.state.site;
         body.rules = this.state.rules.map(this.ruleMapper);
-        console.log("I'm body", body, config.apiURL);
         axios.post(`${config.apiURL}/site`, body)
         .then((response) => {
-            console.log(response);
             this.props.resetRules();
-            this.props.history.push({pathname: '/home'});
+            this.props.history.push({pathname: `/site/${this.state.site}`});
         })
     }
 

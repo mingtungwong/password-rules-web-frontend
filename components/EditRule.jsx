@@ -41,7 +41,6 @@ class EditRule extends React.Component {
     }
 
     handleQuantityChange(event, value) {
-        console.log('rulasdja', this.state);
         const quantity = this.state.quantity.map(item => item);
         if(!isNaN(value)) {
             if(event.target.id === 'quantityMin') quantity[0] = +value;
