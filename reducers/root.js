@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({
+import editRulesReducer from './editRulesReducer';
 
+export default combineReducers({
+    editRules: editRulesReducer
 });

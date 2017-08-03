@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 import root from './root';
 
-export default createStore(root);
+export default createStore(root, applyMiddleware(logger));

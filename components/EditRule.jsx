@@ -32,12 +32,12 @@ class EditRule extends React.Component {
 
     handleRuleChange(event, index, value) {
         this.setState({rule: +value, quantity: []})
-        this.props.callback(this.state);
+        this.props.editRule(this.state);
     }
 
     handleCategoryChange(event, index, value) {
         this.setState({category: +value, quantity: []});
-        this.props.callback(this.state);
+        this.props.editRule(this.state);
     }
 
     handleQuantityChange(event, value) {
@@ -49,7 +49,7 @@ class EditRule extends React.Component {
             if(quantity[1] === 0) quantity[1] = null;
             this.setState({quantity: quantity});
         }
-        this.props.callback(this.state);
+        this.props.editRule(this.state);
     }
 
     render() {
@@ -123,7 +123,7 @@ class EditRule extends React.Component {
                             }
                         </div>
                         <div>
-                            <IconButton onClick={ () => this.props.cancel(this.state.id) }>
+                            <IconButton onClick={ () => this.props.deleteRule(this.state.id) }>
                                 <NavigationCancel className="closeButton" />
                             </IconButton>
                         </div>
