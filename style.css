@@ -3,13 +3,14 @@
 }
 
 .searchBar {
-    margin: 5px auto;
-    max-width: 33%;
+    float: right;
 }
 
 .nav {
     display: flex;
     background-color: #67FFB0;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .home {
@@ -77,4 +78,21 @@
     margin: 0 auto;
     max-width: 33%;
     font-size: 1.2em;
+}
+
+.navLinks {
+    list-style-type: none;
+    display: inline;
+    padding-left: 10px;
+}
+
+.navLinks li {
+    display: inline;
+    padding-right: 10px;
+}
+
+.navLinks a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
 }
