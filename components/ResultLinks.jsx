@@ -10,7 +10,7 @@ class ResultLinks extends React.Component {
                         results.length ?
                         results.map(result => {
                             return (
-                                <div>
+                                <div className="searchResultLinks">
                                     <Link to={`/site/${result.site}`}>{result.site}</Link>
                                 </div>
                             )

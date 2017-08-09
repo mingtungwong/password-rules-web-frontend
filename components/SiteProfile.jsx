@@ -25,7 +25,7 @@ class SiteProfile extends React.Component {
                 {
                     site ?
                     <div>
-                        <h3>Password Rules for '{site.site}'</h3>
+                        <h3>Password Rules for "{site.site}"</h3>
                         {
                             site.rules.map(rule => <SiteRule rule={rule} />)
                         }

@@ -14,11 +14,15 @@ class SearchResults extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div>
                 {
                     this.props.sites ?
-                    <ResultLinks results={this.props.sites} />
+                    <div className="searchResults">
+                        <h3>Search results for "{this.props.match.params.site}"</h3>
+                        <ResultLinks results={this.props.sites} />
+                    </div>
                     :
                     <MuiThemeProvider>
                         <CircularProgress />
