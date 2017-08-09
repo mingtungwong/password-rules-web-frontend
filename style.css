@@ -8,7 +8,9 @@
 }
 
 .nav {
+    margin-top: 0px;
     display: flex;
+    background-color: #67FFB0;
 }
 
 .home {
@@ -64,10 +66,16 @@
 }
 
 .home {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .searchResultLinks {
     font-size: 1.5em;
     margin-bottom: 5px;
+}
+
+.textBlock {
+    margin: 0 auto;
+    max-width: 33%;
+    font-size: 1.2em;
 }
