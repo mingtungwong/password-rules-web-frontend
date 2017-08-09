@@ -1,0 +1,18 @@
+[
+    {
+        "question": "What is Password Rules?",
+        "answer": "Password Rules is a website where users can submit password requirements for sites that they use."
+    },
+    {
+        "question": "How come I can't find rules for a site that I am looking for?",
+        "answer": "The data that is available on Password Rules is user submitted. That means that we rely on crowd sourcing for the information. If the information has not been previously submitted and you happen to know the rules for the site, please submit it yourself."
+    },
+    {
+        "question": "How do I submit rules for a web site?",
+        "answer": "You can submit rules for a website by clicking the 'Add Site' button on the navigation bar on top"
+    },
+    {
+        "question": "How do I search for a web site?",
+        "answer": "You can search for a web site by using the search bar located on the navigation bar on top. The search results will yield any web site that contains your search terms."
+    }
+]
