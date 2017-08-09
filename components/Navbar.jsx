@@ -2,7 +2,6 @@ import React from 'react';
 import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-import FlatButton from 'material-ui/FlatButton';
 import NavBarButton from './NavBarButton.jsx';
 import { Link } from 'react-router-dom';
 
