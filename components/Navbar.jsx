@@ -3,6 +3,11 @@ import SearchBar from 'material-ui-search-bar';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+const buttonStyle = {
+    maxHeight: '35px',
+    marginTop: '5px'
+}
+
 class Navbar extends React.Component {
 
     constructor(props) {
@@ -13,6 +18,7 @@ class Navbar extends React.Component {
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
         this.onAddButtonTap = this.onAddButtonTap.bind(this);
+        this.onHomeButtonTap = this.onHomeButtonTap.bind(this);
     }
 
     onTextChange(text) {
@@ -28,10 +34,19 @@ class Navbar extends React.Component {
         this.props.history.push({pathname: '/addsite'});
     }
 
+    onHomeButtonTap() {
+        this.props.history.push({pathname: '/home'});
+    }
+
     render() {
         return (
                 <MuiThemeProvider>
                     <div className="nav">
+                        <RaisedButton
+                            label="Home"
+                            style={buttonStyle}
+                            onClick={this.onHomeButtonTap}
+                        />
                         <SearchBar
                             hintText=""
                             onChange={ this.onTextChange }
@@ -43,7 +58,7 @@ class Navbar extends React.Component {
                         />
                         <RaisedButton
                             label="Add Site"
-                            style={{maxHeight: "35px", marginTop: "5px"}}
+                            style={buttonStyle}
                             onClick={this.onAddButtonTap}
                         />
                     </div>
