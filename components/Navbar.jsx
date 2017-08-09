@@ -1,8 +1,27 @@
 import React from 'react';
 import SearchBar from 'material-ui-search-bar';
-import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import FlatButton from 'material-ui/FlatButton';
+import NavBarButton from './NavBarButton.jsx';
 import { Link } from 'react-router-dom';
+
+const buttonLinks = [
+    "Home",
+    "Add Site",
+    "FAQ"
+];
+
+const buttonStyle = {
+    position: 'relative',
+    top: '10px',
+    margin: '0px'
+};
+
+const toolBarStyle = {
+    display: 'flex',
+    justifyContent: 'space-between'
+};
 
 class Navbar extends React.Component {
 
@@ -13,6 +32,7 @@ class Navbar extends React.Component {
         }
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
+        this.onButtonClick = this.onButtonClick.bind(this);
     }
 
     onTextChange(text) {
@@ -24,24 +44,45 @@ class Navbar extends React.Component {
         this.props.history.push({pathname: `/results/${this.state.searchText}`});
     }
 
+    onButtonClick(path) {
+        const push = this.props.history.push;
+        push({pathname: `/${path}`})
+    }
+
     render() {
         return (
                 <MuiThemeProvider>
                     <div className="nav">
-                        <ul className="navLinks">
-                            <li><Link to="/home">Home</Link></li>
-                            <li><Link to="/addsite">Add Site</Link></li>
-                        </ul>
-                        <SearchBar
-                            hintText=""
-                            onChange={ this.onTextChange }
-                            onRequestSearch={ this.onSearch }
-                            style={{
-                                margin: '5px',
-                                textAlign: 'center',
-                            }}
-                            className="searchBar"
-                        />
+                        <Toolbar style={toolBarStyle}>
+                            <ToolbarGroup firstChild={true}>
+                            </ToolbarGroup>
+                                <NavBarButton
+                                    title="Home"
+                                    push={this.onButtonClick}
+                                />
+                                <ToolbarSeparator style={buttonStyle} />
+                                <NavBarButton
+                                    title="Add Site"
+                                    push={this.onButtonClick}
+                                />
+                                <ToolbarSeparator style={buttonStyle} />
+                                <NavBarButton
+                                    title="FAQ"
+                                    push={this.onButtonClick}
+                                />
+                            <ToolbarGroup lastChild={true}>
+                                <SearchBar
+                                    hintText=""
+                                    onChange={ this.onTextChange }
+                                    onRequestSearch={ this.onSearch }
+                                    style={{
+                                        margin: '5px',
+                                        textAlign: 'center',
+                                    }}
+                                    className="searchBar"
+                                />
+                            </ToolbarGroup>
+                        </Toolbar>
                     </div>
                 </MuiThemeProvider>
         )

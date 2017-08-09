@@ -2,17 +2,6 @@
     text-align: center;
 }
 
-.searchBar {
-    float: right;
-}
-
-.nav {
-    display: flex;
-    background-color: #67FFB0;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .home {
     text-align: center;
     margin-top: 10px;
