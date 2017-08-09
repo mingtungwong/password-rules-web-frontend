@@ -5,7 +5,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const buttonStyle = {
     maxHeight: '35px',
-    marginTop: '5px'
+    marginTop: '5px',
+    position: 'relative',
+    top: '5px',
+    outline: 'none'
 }
 
 class Navbar extends React.Component {
