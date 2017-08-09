@@ -1,15 +1,11 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
+import FAQElement from './FAQElement.jsx';
 
-const cardTitleStyle = {
-    textAlign: 'left',
-    fontWeight: 'bold'
-}
-
-const cardTextStyle = {
-    textAlign: 'left',
-    fontStyle: 'italic'
+const qa = {
+    question: "What is my purpose?",
+    answer: "Destroy all humans."
 }
 
 const FAQ = () => (
@@ -17,20 +13,7 @@ const FAQ = () => (
     <MuiThemeProvider>
     <div>
         <h3>Frequently Asked Questions</h3>
-        <Card className="faqCard">
-            <CardHeader
-                title="This is a question"
-                actAsExpander={true}
-                showExpandableButton={true}
-                style={cardTitleStyle}
-            />
-            <CardText
-                expandable={true}
-                style={cardTextStyle}
-            >
-                Blah blah blah
-            </CardText>
-        </Card>
+        <FAQElement question={qa.question} answer={qa.answer} />
     </div>
     </MuiThemeProvider>
 )
