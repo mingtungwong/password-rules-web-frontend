@@ -22,8 +22,7 @@ class EditRule extends React.Component {
             rule: ruleChoices.indexOf(props.rule),
             category: categoryChoices.indexOf(props.category),
             quantity: props.quantity,
-            id: props.id,
-            error: props.error
+            id: props.id
         }
         this.handleRuleChange = this.handleRuleChange.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);

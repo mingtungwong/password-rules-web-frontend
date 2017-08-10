@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import config from '../config.json';
+import { validMinimum, validMaximum, validRange } from '../utilities/inputValidation';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -19,7 +20,7 @@ class SiteCreationPage extends React.Component {
         this.state = {
             site: "",
             rules: props.rules,
-            error: false
+            error: null
         }
 
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
@@ -42,18 +43,54 @@ class SiteCreationPage extends React.Component {
         return obj;
     }
 
+    isValidSite() {
+        return this.state.site.length > 0;
+    }
+
+    validateRules(rules) {
+        let isValid = true;
+        for(let rule of rules) {
+            switch(rule.rule) {
+                case "Minimum":
+                    if(!validMinimum(rule)) isValid = false;
+                    break;
+                case "Maximum":
+                    if(!validMaximum(rule)) isValid = false;
+                    break;
+                case "Range":
+                    if(!validRange(rule)) isValid = false;
+                    break;
+            }
+        }
+
+        return isValid;
+    }
+
     submit() {
         const body = {};
         body.site = this.state.site;
         body.rules = this.state.rules.map(this.ruleMapper);
-        axios.post(`${config.apiURL}/site`, body)
-        .then((response) => {
-            this.props.resetRules();
-            this.props.history.push({pathname: `/site/${this.state.site}`});
-        })
+
+        if(this.isValidSite()) {
+            if(this.validateRules(this.state.rules)) {
+                axios.post(`${config.apiURL}/site`, body)
+                .then((response) => {
+                    this.props.resetRules();
+                    this.props.history.push({pathname: `/site/${this.state.site}`});
+                })
+            }
+            else this.setState({error: "rules"});
+        }
+        else {
+            this.setState({error: "site"});
+        }
     }
 
     render() {
+
+        const siteErrorText = 'The site must be filled in';
+        const rulesErrorText = 'There are errors in the rules';
+
         return (
             <div>
                 <MuiThemeProvider>
@@ -62,7 +99,11 @@ class SiteCreationPage extends React.Component {
                             this.state.error ?
                             (
                                 <div className="errorText">
-                                    The site must be filled in
+                                    {
+                                            this.state.error === "site"
+                                            ? siteErrorText
+                                            : rulesErrorText
+                                    }
                                 </div>
                             )
                             : null
@@ -90,7 +131,6 @@ class SiteCreationPage extends React.Component {
                                         rule={element.rule}
                                         category={element.category}
                                         quantity={element.quantity}
-                                        error={element.error}
                                     />)
                                 })
                             }
