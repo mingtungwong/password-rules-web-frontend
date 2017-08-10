@@ -9,7 +9,6 @@ const cardTitleStyle = {
 
 const cardTextStyle = {
     textAlign: 'left',
-    fontStyle: 'italic',
     fontSize: '1.1em'
 }
 
