@@ -62,8 +62,7 @@ class SiteCreationPage extends React.Component {
                     break;
             }
         }
-
-        return isValid;
+        return isValid ? rules.length > 0 : false;
     }
 
     submit() {
@@ -79,7 +78,10 @@ class SiteCreationPage extends React.Component {
                     this.props.history.push({pathname: `/site/${this.state.site}`});
                 })
             }
-            else this.setState({error: "rules"});
+            else {
+                if(!this.state.rules.length) this.setState({error: "noRules"});
+                else this.setState({error: "rules"});
+            }
         }
         else {
             this.setState({error: "site"});
@@ -89,20 +91,24 @@ class SiteCreationPage extends React.Component {
     render() {
 
         const siteErrorText = 'The site must be filled in';
+        const noRulesErrorText = 'There must be at least one rule';
         const rulesErrorText = 'There are errors in the rules';
+        const error = this.state.error;
 
         return (
             <div>
                 <MuiThemeProvider>
                     <div className="addSitePage">
                         {
-                            this.state.error ?
+                            error ?
                             (
                                 <div className="errorText">
                                     {
-                                            this.state.error === "site"
+                                            error === "site"
                                             ? siteErrorText
-                                            : rulesErrorText
+                                            : error === "noRules"
+                                                ? noRulesErrorText
+                                                : rulesErrorText 
                                     }
                                 </div>
                             )
