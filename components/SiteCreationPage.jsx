@@ -42,11 +42,7 @@ class SiteCreationPage extends React.Component {
         obj.quantity = rule.quantity;
         return obj;
     }
-
-    isValidSite() {
-        return this.state.site.length > 0;
-    }
-
+    
     validateRules(rules) {
         let isValid = true;
         for(let rule of rules) {
@@ -90,7 +86,6 @@ class SiteCreationPage extends React.Component {
                 this.setState({error: "site"});
             }
         })
-
     }
 
     render() {
