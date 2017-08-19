@@ -67,30 +67,35 @@ class SiteCreationPage extends React.Component {
 
     submit() {
         const body = {};
-        body.site = this.state.site;
+        body.site = this.state.site.length ? this.state.site : 'x';
         body.rules = this.state.rules.map(this.ruleMapper);
 
-        if(this.isValidSite()) {
-            if(this.validateRules(this.state.rules)) {
-                axios.post(`${config.apiURL}/site`, body)
-                .then((response) => {
-                    this.props.resetRules();
-                    this.props.history.push({pathname: `/site/${this.state.site}`});
-                })
+        axios.get(`${config.apiURL}/valid/${body.site}`)
+        .then(res => res.data)
+        .then(results => {
+            if(results.alive) {
+                if(this.validateRules(this.state.rules)) {
+                    axios.post(`${config.apiURL}/site`, body)
+                    .then((response) => {
+                        this.props.resetRules();
+                        this.props.history.push({pathname: `/site/${this.state.site}`});
+                    })
+                }
+                else {
+                    if(!this.state.rules.length) this.setState({error: "noRules"});
+                    else this.setState({error: "rules"});
+                }
             }
             else {
-                if(!this.state.rules.length) this.setState({error: "noRules"});
-                else this.setState({error: "rules"});
+                this.setState({error: "site"});
             }
-        }
-        else {
-            this.setState({error: "site"});
-        }
+        })
+
     }
 
     render() {
 
-        const siteErrorText = 'The site must be filled in';
+        const siteErrorText = 'The site is invalid';
         const noRulesErrorText = 'There must be at least one rule';
         const rulesErrorText = 'There are errors in the rules';
         const error = this.state.error;
