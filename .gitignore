@@ -1,7 +1,12 @@
 node_modules
 bundle.js
-*.zip
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+password-rules-web-frontend.zip
+
+# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+!.elasticbeanstalk/*.cfg.yml
+
+!.elasticbeanstalk/*.global.yml
+
