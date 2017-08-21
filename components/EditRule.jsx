@@ -8,7 +8,7 @@ import FontIcon from 'material-ui/FontIcon';
 import NavigationCancel from 'material-ui/svg-icons/navigation/cancel';
 
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
-const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces"];
+const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces", "Non-Letter Characters"];
 const errors = {
     "NaN": "One or more values entered is not a number",
     "Range": "The range of numbers is invalid"
