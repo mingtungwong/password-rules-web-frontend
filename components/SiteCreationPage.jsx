@@ -22,11 +22,13 @@ class SiteCreationPage extends React.Component {
         this.state = {
             site: "",
             rules: props.rules,
-            error: null
+            error: null,
+            submitDisabled: false
         }
 
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.submit = this.submit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentWillMount() {
@@ -55,7 +57,7 @@ class SiteCreationPage extends React.Component {
     validateRules(rules) {
         let isValid = true;
         for(let rule of rules) {
-            switch(rule.rule) {
+            switch(ruleChoices[rule.rule]) {
                 case "Minimum":
                     if(!validMinimum(rule)) isValid = false;
                     break;
@@ -80,10 +82,15 @@ class SiteCreationPage extends React.Component {
         return false;
     }
 
+    onSubmit() {
+        this.setState({submitDisabled: true}, this.submit);
+    }
+
     submit() {
         const body = {};
         body.site = this.state.site.length ? this.state.site : 'x';
         body.rules = this.state.rules.map(mapRuleValuesToString);
+
 
         axios.get(`${config.apiURL}/valid/${body.site}`)
         .then(res => res.data)
@@ -97,12 +104,15 @@ class SiteCreationPage extends React.Component {
                     })
                 }
                 else {
-                    if(!this.state.rules.length) this.setState({error: "noRules"});
-                    else this.setState({error: "rules"});
+                    const newState = {submitDisabled: false};
+                    newState.error = this.state.rules.length ? 'rules' : 'noRules';
+                    //if(!this.state.rules.length) this.setState({error: "noRules"});
+                    //else this.setState({error: "rules"});
+                    this.setState(newState);
                 }
             }
             else {
-                this.setState({error: "site"});
+                this.setState({error: "site", submitDisabled: false});
             }
         })
     }
@@ -164,7 +174,8 @@ class SiteCreationPage extends React.Component {
                         <div className="submitButton">
                             <RaisedButton
                                 label="Submit"
-                                onClick={this.submit}
+                                onClick={this.onSubmit}
+                                disabled={this.state.submitDisabled}
                             />
                         </div>
                     </div>

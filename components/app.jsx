@@ -9,6 +9,7 @@ import NavbarContainer from './NavbarContainer.jsx';
 import SearchResultsContainer from './SearchResultsContainer.jsx';
 import SiteProfile from './SiteProfile.jsx';
 import SiteCreationPageContainer from './SiteCreationPageContainer.jsx';
+import EditSitePageContainer from './EditSitePageContainer.jsx';
 import FAQ from './FAQ.jsx';
 import store from '../reducers/store'
 
@@ -31,6 +32,7 @@ class App extends React.Component {
                                 <Route path="/site/:siteName" component={ SiteProfile } />
                                 <Route path="/addsite/:siteName" component={ SiteCreationPageContainer } />
                                 <Route path="/addsite/" component={ SiteCreationPageContainer } />
+                                <Route path="/edit/:siteName" component={ EditSitePageContainer } />
                                 <Route path="/faq" component={ FAQ } />
                                 <Redirect from="/" to="/home" />
                             </Switch>

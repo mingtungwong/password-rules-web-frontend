@@ -3,7 +3,6 @@ import SiteCreationPage from './SiteCreationPage.jsx';
 import { addRule, resetRules } from '../reducers/editRulesReducer';
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         rules: state.editRules
     }

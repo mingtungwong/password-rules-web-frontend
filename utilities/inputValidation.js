@@ -1,11 +1,11 @@
 export const validMinimum = (rule) => {
-    return rule.quantity[0] !== undefined && rule.quantity[0] !== null;
+    return typeof rule.quantity[0] === 'number' && rule.quantity[0] !== 0;
 }
 
-export const validMaxium = (rule) => {
-    return rule.quantity[1] !== undefined && rule.quantity[1] !== null;
+export const validMaximum = (rule) => {
+    return typeof rule.quantity[1] === 'number' && rule.quantity[1] !== 0;
 }
 
 export const validRange = (rule) => {
-    return rule.quantity[0] && rule.quantity[1] && (rule.quantity[1] > rule.quantity[0]);
+    return (validMinimum(rule) && validMaximum(rule)) && (rule.quantity[1] > rule.quantity[0]);
 }
