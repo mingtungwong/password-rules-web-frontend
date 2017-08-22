@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import EditRuleContainer from './EditRuleContainer.jsx';
 
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
-const categoryChoices = ["Numbers", "Capital Letters", "Characters", "Special Characters", "Spaces", "Non-Letter Characters"];
+const categoryChoices = ["Numbers", "Lowercase Letters", "Capital Letters", "Characters", "Special Characters", "Spaces", "Non-Letter Characters"];
 
 class SiteCreationPage extends React.Component {
     
