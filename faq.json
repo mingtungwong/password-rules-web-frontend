@@ -14,5 +14,9 @@
     {
         "question": "How do I search for a web site?",
         "answer": "You can search for a web site by using the search bar located on the navigation bar on top. The search results will yield any web site that contains your search terms."
+    },
+    {
+        "question": "When I am trying to add a site, why does it say that it is invalid?",
+        "answer": "When submitting an entry, the site cannot be empty. It must also be a valid web address. We check for validity by pinging the website and wait for a response."
     }
 ]
