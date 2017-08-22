@@ -29,7 +29,8 @@ class App extends React.Component {
                                 <Route path="/home" component={ Home } />
                                 <Route path="/results/:site" component={ SearchResultsContainer }/>
                                 <Route path="/site/:siteName" component={ SiteProfile } />
-                                <Route path="/addsite" component={ SiteCreationPageContainer } />
+                                <Route path="/addsite/:siteName" component={ SiteCreationPageContainer } />
+                                <Route path="/addsite/" component={ SiteCreationPageContainer } />
                                 <Route path="/faq" component={ FAQ } />
                                 <Redirect from="/" to="/home" />
                             </Switch>

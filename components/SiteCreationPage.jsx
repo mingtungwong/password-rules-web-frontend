@@ -18,17 +18,19 @@ class SiteCreationPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            site: "",
+            site: props.match.params.siteName || "",
             rules: props.rules,
             error: null
         }
+
+        console.log(props);
 
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.submit = this.submit.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
-        this.setState({rules: newProps.rules});
+        this.setState({site: newProps.match.params.siteName, rules: newProps.rules});
     }
 
     onSiteTextChange(event, value) {
@@ -119,6 +121,7 @@ class SiteCreationPage extends React.Component {
                                 floatingLabelText="Site Name"
                                 floatingLabelFixed={true}
                                 onChange={this.onSiteTextChange}
+                                value={this.state.site}
                             />
                         </div>
                         <div className="addRuleButton">
