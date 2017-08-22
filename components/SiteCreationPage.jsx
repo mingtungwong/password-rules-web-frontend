@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 
 import config from '../config.json';
 import { validMinimum, validMaximum, validRange } from '../utilities/inputValidation';
@@ -35,7 +36,7 @@ class SiteCreationPage extends React.Component {
     componentWillReceiveProps(newProps) {
         const siteName = newProps.match.params.siteName;
         const newState = {rules: newProps.rules};
-        if(siteName && this.state.rules.length === newProps.rules.length) newState.site = siteName;
+        if(siteName && !this.isDifferentRules(this.state.rules, newProps.rules)) newState.site = siteName;
         this.setState(newState);
     }
 
@@ -67,6 +68,16 @@ class SiteCreationPage extends React.Component {
             }
         }
         return isValid ? rules.length > 0 : false;
+    }
+
+    isDifferentRules(original, newRules) {
+        let maximum = Math.max(original.length, newRules.length);
+        
+        for(let i = 0; i < maximum; i++) {
+            if(!_.isEqual(original[i], newRules[i])) return true;
+        }
+
+        return false;
     }
 
     submit() {
