@@ -100,8 +100,8 @@ class EditRule extends React.Component {
                                     floatingLabelFixed={true}
                                     onChange={this.handleQuantityChange}
                                     className="quantityTF"
-                                    id="quantityMin"
                                     value={this.state.quantity[0]}
+                                    id="quantityMin"
                                 />
                                 : null
                             }

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import config from '../config.json';
 import { validMinimum, validMaximum, validRange } from '../utilities/inputValidation';
+import { mapRuleValuesToString } from '../utilities/rulesMapper';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -18,19 +19,24 @@ class SiteCreationPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            site: props.match.params.siteName || "",
+            site: "",
             rules: props.rules,
             error: null
         }
-
-        console.log(props);
 
         this.onSiteTextChange = this.onSiteTextChange.bind(this);
         this.submit = this.submit.bind(this);
     }
 
+    componentWillMount() {
+        if(this.props.match.params.siteName) this.setState({site: this.props.match.params.siteName});
+    }
+
     componentWillReceiveProps(newProps) {
-        this.setState({site: newProps.match.params.siteName, rules: newProps.rules});
+        const siteName = newProps.match.params.siteName;
+        const newState = {rules: newProps.rules};
+        if(siteName && this.state.rules.length === newProps.rules.length) newState.site = siteName;
+        this.setState(newState);
     }
 
     onSiteTextChange(event, value) {
@@ -66,7 +72,7 @@ class SiteCreationPage extends React.Component {
     submit() {
         const body = {};
         body.site = this.state.site.length ? this.state.site : 'x';
-        body.rules = this.state.rules.map(this.ruleMapper);
+        body.rules = this.state.rules.map(mapRuleValuesToString);
 
         axios.get(`${config.apiURL}/valid/${body.site}`)
         .then(res => res.data)
