@@ -1,5 +1,5 @@
 const ruleChoices = ["Minimum", "Maximum", "Range", "No"];
-const categoryChoices = ["Numbers", "Lowercase Letters", "Capital Letters", "Characters", "Special Characters", "Spaces", "Non-Letter Characters"];
+const categoryChoices = ["Numbers", "Lowercase Letters", "Uppercase Letters", "Characters", "Special Characters", "Spaces", "Non-Letter Characters"];
 
 export const mapRuleValuesToString = (rule) => {
     const obj = {};
