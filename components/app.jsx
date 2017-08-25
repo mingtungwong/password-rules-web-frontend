@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import  Home  from './Home.jsx';
 import NavbarContainer from './NavbarContainer.jsx';
 import SearchResultsContainer from './SearchResultsContainer.jsx';
-import SiteProfile from './SiteProfile.jsx';
+import SiteProfileContainer from './SiteProfileContainer.jsx';
 import SiteCreationPageContainer from './SiteCreationPageContainer.jsx';
 import EditSitePageContainer from './EditSitePageContainer.jsx';
 import FAQ from './FAQ.jsx';
@@ -29,10 +29,10 @@ class App extends React.Component {
                             <Switch>
                                 <Route path="/home" component={ Home } />
                                 <Route path="/results/:site" component={ SearchResultsContainer }/>
-                                <Route path="/site/:siteName" component={ SiteProfile } />
+                                <Route path="/site/:siteName" component={ SiteProfileContainer } />
                                 <Route path="/addsite/:siteName" component={ SiteCreationPageContainer } />
                                 <Route path="/addsite/" component={ SiteCreationPageContainer } />
-                                <Route path="/edit/:siteName" component={ EditSitePageContainer } />
+                                <Route path="/edit" component={ EditSitePageContainer } />
                                 <Route path="/faq" component={ FAQ } />
                                 <Redirect from="/" to="/home" />
                             </Switch>

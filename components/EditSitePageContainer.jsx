@@ -3,7 +3,7 @@ import EditSitePage from './EditSitePage.jsx';
 
 const mapStateToProps = (state) => {
     return {
-
+        site: state.editSite
     }
 }
 
