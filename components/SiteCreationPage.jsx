@@ -3,7 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 
 import config from '../config.json';
-import { validMinimum, validMaximum, validRange } from '../utilities/inputValidation';
+import { validateRules, isDifferentRules } from '../utilities/inputValidation';
 import { mapRuleValuesToString } from '../utilities/rulesMapper';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -38,48 +38,12 @@ class SiteCreationPage extends React.Component {
     componentWillReceiveProps(newProps) {
         const siteName = newProps.match.params.siteName;
         const newState = {rules: newProps.rules};
-        if(siteName && !this.isDifferentRules(this.state.rules, newProps.rules)) newState.site = siteName;
+        if(siteName && !isDifferentRules(this.state.rules, newProps.rules)) newState.site = siteName;
         this.setState(newState);
     }
 
     onSiteTextChange(event, value) {
         this.setState({site: value});
-    }
-
-    ruleMapper(rule) {
-        const obj = {};
-        obj.rule = ruleChoices[rule.rule];
-        obj.category = categoryChoices[rule.category];
-        obj.quantity = rule.quantity;
-        return obj;
-    }
-    
-    validateRules(rules) {
-        let isValid = true;
-        for(let rule of rules) {
-            switch(ruleChoices[rule.rule]) {
-                case "Minimum":
-                    if(!validMinimum(rule)) isValid = false;
-                    break;
-                case "Maximum":
-                    if(!validMaximum(rule)) isValid = false;
-                    break;
-                case "Range":
-                    if(!validRange(rule)) isValid = false;
-                    break;
-            }
-        }
-        return isValid ? rules.length > 0 : false;
-    }
-
-    isDifferentRules(original, newRules) {
-        let maximum = Math.max(original.length, newRules.length);
-        
-        for(let i = 0; i < maximum; i++) {
-            if(!_.isEqual(original[i], newRules[i])) return true;
-        }
-
-        return false;
     }
 
     onSubmit() {
@@ -96,7 +60,7 @@ class SiteCreationPage extends React.Component {
         .then(res => res.data)
         .then(results => {
             if(results.alive) {
-                if(this.validateRules(this.state.rules)) {
+                if(validateRules(this.state.rules)) {
                     axios.post(`${config.apiURL}/site`, body)
                     .then((response) => {
                         this.props.resetRules();
@@ -106,8 +70,6 @@ class SiteCreationPage extends React.Component {
                 else {
                     const newState = {submitDisabled: false};
                     newState.error = this.state.rules.length ? 'rules' : 'noRules';
-                    //if(!this.state.rules.length) this.setState({error: "noRules"});
-                    //else this.setState({error: "rules"});
                     this.setState(newState);
                 }
             }
