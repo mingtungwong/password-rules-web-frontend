@@ -1,8 +1,7 @@
 node_modules
 bundle.js
-zip.bat
-password-rules-web-frontend.zip
 todo.txt
+.env
 
 # Elastic Beanstalk Files
 
