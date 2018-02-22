@@ -12,7 +12,6 @@ app.listen(port, () => console.log(`I'm listening on port ${port}`));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 1337;
 const options = {
   keepAlive: 1,
   connectTimeoutMS: 30000
@@ -63,4 +62,4 @@ app.delete('/site/:siteName', (req, res, next) => {
 app.use(validationRouter);
 
 app.use(express.static('public'));
-app.get('/*', (req, res,next) => res.sendFile(path.resolve(__dirname + 'index.html')));
+app.get('/', (req, res,next) => res.sendFile(path.resolve(__dirname + 'index.html')));
