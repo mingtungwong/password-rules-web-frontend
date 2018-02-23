@@ -8,8 +8,6 @@ const validationRouter = require('./routes/validation');
 
 const port = process.env.PORT || 3000;
 
-console.log(process.env["MONGODB_URI"]);
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
