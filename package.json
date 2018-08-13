@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p --config ./webpack.dev.config.js --watch",
-    "start": "node app",
+    "start": "npm run-script build && node app",
     "postinstall": "webpack --config webpack.prod.config.js"
   },
   "author": "",
