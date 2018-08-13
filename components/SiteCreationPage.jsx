@@ -55,28 +55,19 @@ class SiteCreationPage extends React.Component {
         body.site = this.state.site.length ? this.state.site : 'x';
         body.rules = this.state.rules.map(mapRuleValuesToString);
 
-
-        axios.get(`${config.apiURL}/valid/${body.site}`)
-        .then(res => res.data)
-        .then(results => {
-            if(results.alive) {
-                if(validateRules(this.state.rules)) {
-                    axios.post(`${config.apiURL}/site`, body)
-                    .then((response) => {
-                        this.props.resetRules();
-                        this.props.history.push({pathname: `/site/${this.state.site}`});
-                    })
-                }
-                else {
-                    const newState = {submitDisabled: false};
-                    newState.error = this.state.rules.length ? 'rules' : 'noRules';
-                    this.setState(newState);
-                }
-            }
-            else {
-                this.setState({error: "site", submitDisabled: false});
-            }
-        })
+        if(validateRules(this.state.rules)) {
+            axios.post(`${config.apiURL}/site`, body)
+            .then(response => {
+                this.props.resetRules();
+                this.props.history.push({pathname: `/site/${this.state.site}`});
+            })
+        }
+        else {
+            const newState = {submitDisabled: false};
+            newState.error = this.state.rules.length ? 'rules' : 'noRules';
+            this.setState(newState);
+        }
+            
     }
 
     render() {
